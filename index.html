@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>R1ntax – Deutsch Trainer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <video id="bgVideo" class="bg-video" autoplay loop muted playsinline>
+    <source src="media/background.mp4" type="video/mp4" />
+  </video>
+  <canvas id="particleCanvas"></canvas>
+  <audio id="bgMusic" src="media/music.mp3" loop></audio>
+  <audio id="correctSfx" src="media/correct.mp3"></audio>
+  <audio id="wrongSfx" src="media/wrong.mp3"></audio>
+
+  <div id="toastContainer" class="toast-container"></div>
+
+  <main id="appRoot" class="app-shell">
+    <section id="authView" class="panel auth-panel visible">
+      <h1>R1ntax – Deutsch Trainer</h1>
+      <p class="subtitle">International gamified German vocabulary platform.</p>
+      <div class="auth-grid">
+        <button id="googleLoginBtn" class="btn btn-glow">Continue with Google</button>
+        <button id="facebookLoginBtn" class="btn btn-glow">Continue with Facebook</button>
+        <button id="phoneLoginBtn" class="btn btn-glow">Continue with Phone</button>
+        <button id="telegramLoginBtn" class="btn btn-glow">Telegram Widget Login</button>
+      </div>
+      <form id="emailAuthForm" class="auth-form">
+        <input id="emailInput" type="email" placeholder="Email" required />
+        <input id="passwordInput" type="password" placeholder="Password" required minlength="6" />
+        <div class="row gap-sm">
+          <button type="submit" class="btn">Sign In</button>
+          <button type="button" id="registerBtn" class="btn btn-secondary">Register</button>
+        </div>
+      </form>
+      <div id="phoneAuthContainer" class="phone-auth hidden">
+        <input id="phoneInput" type="tel" placeholder="+49123456789" />
+        <button id="sendPhoneCodeBtn" class="btn">Send code</button>
+        <input id="phoneCodeInput" type="text" placeholder="SMS code" />
+        <button id="verifyPhoneCodeBtn" class="btn">Verify</button>
+      </div>
+      <div id="recaptcha-container"></div>
+      <small>By continuing, you agree to community & fair-play rules.</small>
+    </section>
+
+    <section id="dashboardView" class="panel hidden">
+      <header class="dashboard-header">
+        <div>
+          <h2 id="welcomeName">Welcome</h2>
+          <p id="regionLabel">Region: --</p>
+        </div>
+        <div class="user-meta">
+          <img id="rankIcon" src="icons/rank1.png" alt="Rank Icon" class="rank-icon" />
+          <div>
+            <p id="rankName">Anfänger</p>
+            <p id="xpLabel">XP: 0</p>
+          </div>
+        </div>
+      </header>
+
+      <div class="xp-wrap">
+        <div id="xpBar" class="xp-bar"></div>
+      </div>
+      <div class="stats-grid">
+        <div class="card"><h3>Streak</h3><p id="dailyStreak">0 🔥</p></div>
+        <div class="card"><h3>Correct Streak</h3><p id="correctStreak">0 ⚡</p></div>
+        <div class="card"><h3>Wins</h3><p id="winsLabel">0</p></div>
+        <div class="card"><h3>Losses</h3><p id="lossesLabel">0</p></div>
+      </div>
+
+      <nav class="menu-grid">
+        <button data-view="learnView" class="menu-btn">Learn words</button>
+        <button data-view="duelView" class="menu-btn">Online duel</button>
+        <button data-view="myWordsView" class="menu-btn">My words</button>
+        <button data-view="synAntView" class="menu-btn">Synonyms / Antonyms</button>
+        <button data-view="leaderboardView" class="menu-btn">Leaderboard</button>
+        <button data-view="settingsView" class="menu-btn">Settings</button>
+      </nav>
+
+      <section id="learnView" class="sub-view hidden"></section>
+      <section id="duelView" class="sub-view hidden"></section>
+      <section id="myWordsView" class="sub-view hidden"></section>
+      <section id="synAntView" class="sub-view hidden"></section>
+      <section id="leaderboardView" class="sub-view hidden"></section>
+      <section id="settingsView" class="sub-view hidden"></section>
+      <section id="adminView" class="sub-view hidden"></section>
+
+      <footer class="dashboard-footer">
+        <button id="openChestBtn" class="btn">Open Chest</button>
+        <button id="dailyQuestBtn" class="btn btn-secondary">Claim Daily Quest</button>
+        <button id="logoutBtn" class="btn btn-danger">Logout</button>
+      </footer>
+    </section>
+  </main>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
